@@ -1,5 +1,5 @@
+import {Message} from './components';
 import './App.css';
-import {Message} from './components/message';
 
 function App() {
 
@@ -7,7 +7,8 @@ function App() {
 
   return (
     <div className="App">
-      <Message text={text} />
+      <h1>Главная страница</h1>
+      <Message text={text} click={() => console.log('click')}>Информация, передаваемая в компонент Message</Message>
     </div>
   );
 }
