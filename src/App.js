@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import {Message} from './components';
+import { Message, Form, Rooms } from './components';
+
 import './App.css';
-import { Form } from './components/form';
 
 function App() {
  
   const [messageList, setMessageList] = useState([]);
+  const [chatList, setChatList] = useState([
+    {id: 1, name: 'room1'},
+    {id: 2, name: 'room2'},
+    {id: 3, name: 'room3'},
+  ]);
 
   const addMessage = ({text, author}) => {
     setMessageList([
@@ -15,28 +20,31 @@ function App() {
   }
 
   useEffect(() => {
-
     if (messageList.length > 0 &&
         messageList[messageList.length - 1].author === 'user') {
           setTimeout(() => {
             addMessage({author: 'bot', text: 'Привет, я бот, сообщение автоматическое!!!!'});
           }, 1500)
     }
-
   }, [messageList]);
 
   return (
     <div className="App">
-      <h1>Главная страница</h1>
+      <h1>Чат</h1>
 
-      <Form addMessage={addMessage}/>
+      <div className='container'>
+        <Rooms chatList={chatList}/>
 
-      {messageList.map(item => {
-        return <Message message={item} />
-      })}
+        <div className='content'>
+          <Form addMessage={addMessage}/>
 
-      {!messageList.length && (<div>сообщений нет</div>)}
+          {messageList.map(item => {
+            return <Message message={item} key={item.id} />
+          })}
 
+          {!messageList.length && (<div>сообщений нет</div>)}
+        </div>
+      </div>
     </div>
   );
 }
