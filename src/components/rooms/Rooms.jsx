@@ -56,9 +56,7 @@ export const Rooms = () => {
 
                 {checkRoom().length > 0 ? <Messages addMessage={addMessage} messageList={messageList}/>
                 : 
-                    <Routes>
-                        <Route path="/rooms/:roomId" element={<Navigate replace to="/" />} />
-                    </Routes>
+                <Navigate replace to="/" />
                 }
 
             </div>
