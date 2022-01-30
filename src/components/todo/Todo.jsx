@@ -4,9 +4,16 @@ import { ADD_TODO, CHANGE_TODO_STATUS, REMOVE_TODO } from "../../store/todo";
 
 export const Todo = () => {
     const [value, setValue] = useState();
+    const [filterList, setFilterList] = useState(undefined);
 
     const dispatch = useDispatch();
-    const list = useSelector((state) => state.list)
+    const list = useSelector((state) => {
+        if (filterList === undefined) {
+            return state.list
+        }
+
+        return state.list.filter(({status}) => status === filterList)
+    })
 
     const onChange = (event) => {
         setValue(event.target.value);
@@ -43,6 +50,10 @@ export const Todo = () => {
         })
     }
 
+    const onChangeFilterList = (status) => {
+        setFilterList(status);
+    }
+
     return (
         <div>
             <h1>Todo</h1>
@@ -53,6 +64,11 @@ export const Todo = () => {
             </form>
             
             <br />
+
+            <div>FilterBlock</div>
+            <button onClick={() => onChangeFilterList()}>all</button>
+            <button onClick={() => onChangeFilterList(true)}>true</button>
+            <button onClick={() => onChangeFilterList(false)}>false</button>
 
             <ul>
                 {list.map(el => {
