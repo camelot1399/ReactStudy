@@ -27,7 +27,7 @@ export const RoomsList = ({chatList, children}) => {
             >
                 {chatList.map(room => {
                     return (
-                        <Link to={`/rooms/${room.id}`}>
+                        <Link to={`/rooms/${room.id}`} key={room.id}>
                             <ListItemButton>
                                 <ListItemIcon>
                                     <HomeIcon />
