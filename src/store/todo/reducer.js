@@ -1,11 +1,16 @@
-import { 
-    ADD_TODO, 
-    CHANGE_TODO_STATUS, 
-    REMOVE_TODO 
+import {
+    ADD_TODO,
+    CHANGE_TODO_STATUS,
+    REMOVE_TODO, SET_FILTER_BY_STATUS
 } from ".";
 
 const initialState = {
     list: [],
+    filter: {
+        status: undefined,
+        search: '',
+        sortBy: undefined,
+    }
 };
 
 export const todoReducer = (state = initialState, action) => {
@@ -34,9 +39,6 @@ export const todoReducer = (state = initialState, action) => {
                 return state;
             }
 
-            console.log('copyList', copyList[findIndex]);
-            console.log('action', action.payload);
-            
             copyList[findIndex] = {
                 ...copyList[findIndex],
                 ...action.payload
@@ -44,6 +46,16 @@ export const todoReducer = (state = initialState, action) => {
             return {
                 ...state,
                 list: copyList
+            }
+        }
+        case SET_FILTER_BY_STATUS: {
+            console.log('filter', action.payload)
+            return {
+                ...state,
+                filter: {
+                    ...state.filter,
+                    status: action.payload
+                }
             }
         }
         default: {

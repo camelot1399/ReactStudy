@@ -1,18 +1,19 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { CHANGE_CHECKBOX_PROFILE } from "../../store/profile";
+import {CHANGE_CHECKBOX_PROFILE, handleCheckBoxAction} from "../../store/profile";
 
 export const Profile = () => {
     const dispatch = useDispatch();
     const statusCheckbox = useSelector((state) => state.status);
 
     const handleCheckbox = (event) => {
-        dispatch({
-            type: CHANGE_CHECKBOX_PROFILE,
-            payload: {
-                status: event.target.checked
-            }
-        })
+        // dispatch({
+        //     type: CHANGE_CHECKBOX_PROFILE,
+        //     payload: {
+        //         status: event.target.checked
+        //     }
+        // })
+        dispatch(handleCheckBoxAction(event.target.checked))
     }
 
     return (

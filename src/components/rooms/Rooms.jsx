@@ -2,32 +2,27 @@ import React, { useEffect, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import { Messages } from "../messages";
 import { RoomsList, AddRooms } from "../rooms";
+import { useSelector, useDispatch } from 'react-redux'
+import {addNewRoom, getRooms} from "../../store/rooms";
+import {addNewMessage, getMessages} from "../../store/messages";
 export const Rooms = () => {
 
-    const [messageList, setMessageList] = useState([]);
-    const [chatList, setChatList] = useState([
-      {id: 1, name: 'room1'},
-      {id: 2, name: 'room2'},
-      {id: 3, name: 'room3'},
-    ]);
+    const chatList = useSelector(getRooms);
+    const messageList = useSelector(getMessages);
+
+    const dispatch = useDispatch();
 
     const { roomId } = useParams();
 
     const addToChatList = (roomName) => {
-        
-        console.log('roomName', roomName);
-        setChatList([
-            ...chatList,
-            {id: new Date(), name: roomName}
-        ]);
+        dispatch(addNewRoom({id: new Date(), name: roomName}))
     }
   
     const addMessage = ({text, author}) => {
-      setMessageList([
-        ...messageList,
-        {id: messageList.length + 1, author: author, text: text}  
-      ])
-    }
+      dispatch(addNewMessage(
+          {id: Date.now(), author: author, text: text}
+      ));
+    };
 
     const checkRoom = () => {
         return chatList.filter(el => el.id === parseInt(roomId));
@@ -37,7 +32,9 @@ export const Rooms = () => {
         if (messageList.length > 0 &&
             messageList[messageList.length - 1].author === 'user') {
                 setTimeout(() => {
-                addMessage({author: 'bot', text: 'Привет, я бот, сообщение автоматическое!!!!'});
+                    dispatch(addNewMessage(
+                        {author: 'bot', text: 'Привет, я бот, сообщение автоматическое!!!!'}
+                    ));
                 }, 1500)
         }
     }, [messageList]);
