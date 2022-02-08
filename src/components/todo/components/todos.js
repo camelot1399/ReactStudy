@@ -1,16 +1,9 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import {
-    ADD_TODO,
-    addTodoAction,
-    CHANGE_TODO_STATUS,
-    changeTodoStatusActions,
-    REMOVE_TODO,
-    removeTodo, setFilterByStatus
-} from "../../store/todo";
-import {getFilteredByStatusTodoList} from "../../store/todo/selectors";
+import React, {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {getFilteredByStatusTodoList} from "../../../store/todo/selectors";
+import {addTodoAction, changeTodoStatusActions, removeTodo, setFilterByStatus} from "../../../store/todo";
 
-export const Todo = () => {
+export const Todos = () => {
     const [value, setValue] = useState();
 
     const dispatch = useDispatch();
@@ -73,7 +66,7 @@ export const Todo = () => {
                 <input type="text" onChange={(event) => onChange(event)} value={value} />
                 <button>send</button>
             </form>
-            
+
             <br />
 
             <div>FilterBlock</div>
@@ -84,13 +77,13 @@ export const Todo = () => {
             <ul>
                 {list.map(el => {
                     return <li key={el.id}>
-                                <input 
-                                    type="checkbox" 
-                                    onChange={onChangeStatus(el.id)} 
-                                    checked={el.status}
-                                /> {el.text}
-                                <button onClick={() => onRemove(el.id)}>remove</button>
-                            </li>
+                        <input
+                            type="checkbox"
+                            onChange={onChangeStatus(el.id)}
+                            checked={el.status}
+                        /> {el.text}
+                        <button onClick={() => onRemove(el.id)}>remove</button>
+                    </li>
                 })}
             </ul>
 
