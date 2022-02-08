@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { Messages } from "../messages";
-import { RoomsList } from "../rooms";
-import { AddRooms } from "../rooms/addRooms/AddRooms";
-
+import { RoomsList, AddRooms } from "../rooms";
 export const Rooms = () => {
 
     const [messageList, setMessageList] = useState([]);
@@ -12,6 +10,8 @@ export const Rooms = () => {
       {id: 2, name: 'room2'},
       {id: 3, name: 'room3'},
     ]);
+
+    const { roomId } = useParams();
 
     const addToChatList = (roomName) => {
         
@@ -27,6 +27,10 @@ export const Rooms = () => {
         ...messageList,
         {id: messageList.length + 1, author: author, text: text}  
       ])
+    }
+
+    const checkRoom = () => {
+        return chatList.filter(el => el.id === parseInt(roomId));
     }
 
     useEffect(() => {
@@ -48,7 +52,11 @@ export const Rooms = () => {
                     <AddRooms addToChatList={addToChatList} />
                 </RoomsList>
 
-                <Messages addMessage={addMessage} messageList={messageList}/>
+                {checkRoom().length > 0 ? <Messages addMessage={addMessage} messageList={messageList}/>
+                : 
+                <Navigate replace to="/" />
+                }
+
             </div>
         </div>
     );

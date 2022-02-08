@@ -5,6 +5,7 @@ import './App.css';
 import { HomeLayout } from './layouts';
 import { Rooms } from './components/rooms';
 import { Messages } from './components/messages';
+import { Todo } from './components/todo/Todo';
 
 function App() {
  
@@ -17,6 +18,7 @@ function App() {
               <Route path="/rooms/:roomId" element={<Messages />}></Route>
           </Route>
           <Route path="/profile" element={<Profile />}></Route>
+          <Route path="/todo" element={<Todo />}></Route>
         </Routes>
       </HomeLayout>
       </div>

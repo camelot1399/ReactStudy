@@ -10,7 +10,7 @@ export const HomeLayout = ({children}) => {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/rooms">Rooms</Link>
+              <Link to="/rooms/1">Rooms</Link>
             </li>
             <li>
               <Link to="/profile">Profile</Link>
