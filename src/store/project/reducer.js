@@ -1,3 +1,4 @@
+import {ADD_PROJECT, REMOVE_PROJECT} from "./actions";
 
 const initialState = {
     projects: [],
