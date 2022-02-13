@@ -1,0 +1,1 @@
+export const Error = () => <div>Ошибка получения данных</div>;

@@ -1,17 +1,21 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk'
 import { todoReducer } from './todo';
 import { profileReducer } from './profile';
-import {projectReducer} from "./project/reducer";
 import {RoomsReducer} from "./rooms";
 import {MessagesReducer} from "./messages";
+import {FromAPIReducer} from "./fromAPI/reducer";
+
+const composeEnhancers = window.REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export const store = createStore(
     combineReducers({
-        todo: todoReducer,
-        profile: profileReducer,
-        // projects: projectReducer,
-        rooms: RoomsReducer,
-        messages: MessagesReducer,
+        // todo: todoReducer,
+        // profile: profileReducer,
+        // rooms: RoomsReducer,
+        // messages: MessagesReducer,
+        users: FromAPIReducer
     }),
-    window.REDUX_DEVTOOLS_EXTENSION && window.REDUX_DEVTOOLS_EXTENSION()
+    composeEnhancers(applyMiddleware(thunk))
+    // window.REDUX_DEVTOOLS_EXTENSION && window.REDUX_DEVTOOLS_EXTENSION()
 );
