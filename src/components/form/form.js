@@ -1,14 +1,18 @@
 import React, { useState, useRef } from "react";
 import { Input } from "../UI";
 import Button from '@mui/material/Button';
+import {useDispatch} from "react-redux";
+import {addMessageWithThunk} from '../../store/messages'
 
 export const Form = ({addMessage}) => {
     const [input, setInput] = useState('');
     const inputRef = useRef(null);
+    const dispatch = useDispatch();
 
     const onSubmit = (event) => {
+        console.log('mess', {author: 'user', text: input})
         event.preventDefault();
-        addMessage({author: 'user', text: input});
+        dispatch(addMessageWithThunk({author: 'user', text: input}));
         setInput('');
         inputRef.current.focus();
     };
