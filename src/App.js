@@ -6,6 +6,8 @@ import { HomeLayout } from './layouts';
 import { Rooms } from './components/rooms';
 import { Messages } from './components/messages';
 import { Todo } from './components/todo/Todo';
+import {FromAPI} from "./components/fromAPI/FromAPI";
+import {MiddlewareExample} from "./pages/middleware";
 
 function App() {
  
@@ -19,6 +21,8 @@ function App() {
           </Route>
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/todo" element={<Todo />}></Route>
+          <Route path="/fromAPI" element={<FromAPI />}></Route>
+          <Route path="/middleware" element={<MiddlewareExample />}></Route>
         </Routes>
       </HomeLayout>
       </div>
