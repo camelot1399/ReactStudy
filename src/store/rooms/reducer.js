@@ -1,4 +1,4 @@
-import {ADD_TO_ROOMS} from "./actions";
+import {ADD_TO_ROOMS, REMOVE_ROOM} from "./actions";
 
 
 const initialState = {
@@ -19,6 +19,12 @@ export const RoomsReducer = (state = initialState, action) => {
                     ...state.rooms,
                     action.payload
                 ]
+            }
+        }
+
+        case REMOVE_ROOM: {
+            return {
+                rooms: state.rooms.filter((item) => item.id !== action.payload)
             }
         }
         default: {
